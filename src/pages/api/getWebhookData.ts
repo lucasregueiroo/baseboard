@@ -1,48 +1,26 @@
-import { MongoClient } from 'mongodb';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
-const uri = 'mongodb+srv://baseboardfi:baseboardfi@test.oa5jx.mongodb.net/?retryWrites=true&w=majority&appName=test';
-const dbName = 'test';
-const collectionName = 'test';
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://baseboardfi:4uUh4iSdAFuUFaC5@test.oa5jx.mongodb.net/";
 
-// Initialize a global variable to hold the connection
-let cachedClient: MongoClient | null = null;
-let cachedDb: any = null;
-
-async function connectToDatabase() {
-  if (cachedClient && cachedDb) {
-    // Use the existing database connection
-    return { client: cachedClient, db: cachedDb };
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
   }
+});
 
-  if (!uri) {
-    throw new Error('MongoDB URI is not defined in environment variables');
-  }
-
-  const client = new MongoClient(uri);
-  await client.connect();
-  const db = client.db(dbName);
-
-  // Cache the database connection and return the connection
-  cachedClient = client;
-  cachedDb = db;
-  return { client, db };
-}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+async function run() {
   try {
-    const { db } = await connectToDatabase();
-    const collection = db.collection(collectionName);
-
-    // Fetch the latest webhook data
-    const data = await collection.find({}).sort({_id: -1}).limit(1).toArray();
-
-    res.status(200).json(data);
-  } catch (error) {
-    console.error('Failed to fetch data', error);
-    res.status(500).json({ message: 'Failed to fetch data' });
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
   }
 }
+run().catch(console.dir);

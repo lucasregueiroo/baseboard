@@ -5,7 +5,7 @@ const DataDisplay = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/api/getWebhookData');
+      const response = await fetch('/api/data');
       const jsonData = await response.json();
       setData(jsonData);
     };

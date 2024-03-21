@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // MongoDB URI and database/collection names
-const uri = 'mongodb+srv://baseboardfi:baseboardfi@test.oa5jx.mongodb.net/?retryWrites=true&w=majority&appName=test';
+const uri = 'mongodb+srv://baseboardfi:4uUh4iSdAFuUFaC5@test.oa5jx.mongodb.net/';
 const dbName = 'test';
 const collectionName = 'test';
 
