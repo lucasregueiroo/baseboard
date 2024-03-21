@@ -2,9 +2,9 @@ import { MongoClient } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 // MongoDB URI and database/collection names
-const uri = process.env.MONGODB_URI;
-const dbName = 'yourDatabase';
-const collectionName = 'webhookData';
+const uri = "mongodb+srv://baseboardfi:Habana6060@test.oa5jx.mongodb.net/?retryWrites=true&w=majority&appName=test";
+const dbName = 'test';
+const collectionName = 'test';
 
 export default async function handler(
   req: NextApiRequest,
