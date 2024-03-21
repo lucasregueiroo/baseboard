@@ -12,6 +12,7 @@
     "@apollo/client": "^3.9.8",
     "axios": "^1.6.8",
     "graphql": "^16.8.1",
+    "mongodb": "^6.5.0",
     "moralis": "^2.25.2",
     "next": "14.1.4",
     "react": "^18",
